@@ -6,7 +6,7 @@
     "bn": "tsc",
     "bw": "webpack",
     "postinstall": "npm run bn && npm run bw",
-    "build": "npm run install && npm run tsc",
+    "build": "npm install && npm run tsc",
     "start": "npm run serve",
     "serve": "node dist/server.js",
     "wn": "nodemon dist/server.js",
