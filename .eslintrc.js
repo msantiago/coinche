@@ -264,13 +264,13 @@ module.exports = {
 		'prefer-const': 'error', // Risque d'utilisation conflictueuse d'une même variable
 		'no-eval': 'error', // Risque d'exécution de code malicieux
 		'linebreak-style': ['error', 'unix'], // Problèmes de comparaison de fichier et compilation
-		'semi': ['error', 'always'], // Séparation des lignes
+		// 'semi': ['error', 'always'], // Séparation des lignes
 		'strict': ['error', 'never'], // A priori pas de raison d'utiliser cette directive
 
 		'babel/no-invalid-this': 'error', // Risque d'utilisation dangereuse de this
 		'babel/new-cap': 'error',
 		'babel/camelcase': 'error',
-		'babel/semi': 'error',
+		// 'babel/semi': 'error',
 		'babel/no-unused-expressions': 'error',
 		'babel/valid-typeof': 'error',
 		'react/no-access-state-in-setstate': 'error', // Risque de mauvais calcul du nouvel état
