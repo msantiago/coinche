@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "main": "dist/server.js",
   "scripts": {
-    "bn": "tsc",
-    "bw": "webpack",
-    "postinstall": "npm run bn && npm run bw",
-    "build": "npm install && tsc",
+    "buid-node": "tsc",
+    "build-web": "webpack",
     "start": "npm run serve",
     "serve": "node dist/server.js",
     "wn": "nodemon dist/server.js",
