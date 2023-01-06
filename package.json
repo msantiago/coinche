@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "dist/server.js",
   "scripts": {
-    "buid-node": "tsc",
+    "build-node": "tsc",
     "build-web": "webpack",
     "start": "npm run serve",
     "serve": "node dist/server.js",
