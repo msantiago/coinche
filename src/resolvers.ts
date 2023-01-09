@@ -1,16 +1,18 @@
 /* eslint-disable no-useless-concat */
 // eslint-disable-next-line no-unused-vars
-import { ObjectID, MongoClient, Collection } from 'mongodb';
+import { MongoClient, Collection } from 'mongodb';
 
 // eslint-disable-next-line import/default
 import moment from 'moment-timezone';
 import { Kind, GraphQLScalarType } from 'graphql';
+import { ObjectID } from 'bson';
 
 let col: Collection<GameData> | null = null;
 export const initializeCollection = async () => {
 	// eslint-disable-next-line no-process-env, global-require
 	const MONGODB_URI = process.env.MONGODB_URI || (require('../env').default || {}).MONGODB_URI;
-	const client = await MongoClient.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+	console.log("MONGODB_URI", MONGODB_URI)
+	const client = await MongoClient.connect(MONGODB_URI);
 	const dbName = MONGODB_URI.match(/^.*\/([a-zA-Z0-9_]+$)/u)[1];
 	col = client.db(dbName).collection('games');
 };
@@ -37,7 +39,6 @@ const colors = ['blue', 'green', 'grey', 'purple', 'red', 'yellow'];
 
 
 interface GameData {
-	_id: ObjectID
 	players: { name: string | null, token: string | null }[]
 	hands: string[][] | null
 	winnedCards: string[][] | null
@@ -104,7 +105,7 @@ export default {
 			if (player < 0) throw new Error("Wrong player");
 
 			return {
-				id: gameData._id.toHexString(),
+				id: gameData._id,
 				player,
 				players: gameData.players.map(({ name }) => name),
 				hand: gameData.hands && gameData.hands[player],
@@ -269,7 +270,7 @@ export default {
 				// On cherche le symbol suivant
 				const suit = (playerHand.find((c) => getCardColor(c) !== lastColor) || playerHand[0]).substr(-1);
 
-				const cards = [];
+				const cards:string[] = [];
 				// eslint-disable-next-line no-constant-condition
 				while (true) {
 					const nextCardIndex = playerHand.findIndex((c) => c.substr(-1) === suit);
@@ -280,8 +281,8 @@ export default {
 				const reverseCoef = args.reverse ? -1 : 1;
 
 				cards.sort((a, b) => {
-					const aSuit = a.substr(-1);
-					const bSuit = b.substr(-1);
+					const aSuit = a.slice(-1);
+					const bSuit = b.slice(-1);
 					const aValue = a.substring(0, a.length - 1);
 					const bValue = b.substring(0, b.length - 1);
 					if (aSuit !== bSuit) throw new Error("Not same suit");

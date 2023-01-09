@@ -16,16 +16,18 @@ moment.locale('fr');
 	const server = new ApolloServer({
 		typeDefs: gql(schema),
 		resolvers,
-		playground: true,
 		debug: true,
 	});
 	const graphqlPath = '/graphql';
 
 
 	// eslint-disable-next-line no-process-env
-	const PORT = process.env.PORT || 3000;
+	console.log("process.env.PORT", process.env.PORT)
+	const PORT = process.env.PORT || 3030;
 	const app = express();
 
+	await server.start()
+	
 	server.applyMiddleware({
 		app: app,
 		path: graphqlPath,
