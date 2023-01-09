@@ -17,7 +17,7 @@
     "url": "https://github.com/msantiago/coinche/issues"
   },
   "homepage": "https://github.com/msantiago/coinche#readme",
-  "run start": {
+  "dependencies": {
     "apollo-boost": "^0.4.9",
     "apollo-server-express": "^3.11.1",
     "express": "^4.18.2",
